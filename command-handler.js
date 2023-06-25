@@ -1,6 +1,7 @@
 import { homedir, cpus, arch, EOL } from 'node:os';
 import path from 'node:path';
 import { existsSync } from 'node:fs';
+import { readdir } from 'node:fs/promises';
 const showCurrentDir = () => console.log(`You are currently in ${process.env.currentDir}`)
 
 export const handleCommands = (data) => {
@@ -31,7 +32,14 @@ export const handleCommands = (data) => {
         showCurrentDir()
         break;
       case 'ls':
-        showCurrentDir()
+        let result = [];
+        readdir(process.env.currentDir, { withFileTypes: true }).then((dirnets) => {
+          for (const dirnet of dirnets) {
+            result.push({Name: dirnet.name, Type: dirnet.isFile() ? 'file' : 'directory'})
+          }
+          console.table(result);
+          showCurrentDir()
+        })
         break;
       case 'cat':
         showCurrentDir()
