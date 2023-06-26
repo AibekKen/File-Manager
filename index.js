@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { homedir } from 'node:os';
 import { handleCommands } from './command-handler.js';
 
