@@ -1,5 +1,5 @@
 import { homedir } from 'node:os';
-import { handleCommands } from './command-handler.js';
+import { handleCommands } from './src/command-handler.js';
 
 const args = process.argv.slice(2)
 const userName = args.find((item) => item.includes('--username')).split('=')[1]
